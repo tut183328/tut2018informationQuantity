@@ -131,7 +131,7 @@ public class TestCase {
     	    myObject.setTarget(target.getBytes());
     	    freq = myObject.frequency();
 
-    	    if(-1 == freq) { System.out.println("OK"); } else {System.out.println("WRONG:freq="+freq ); }
+    	    if(Double.MAX_VALUE == freq) { System.out.println("OK"); } else {System.out.println("WRONG:freq="+freq ); }
     	}
     	catch(Exception e) {
     	    System.out.println("Exception occurred: STOP");
@@ -247,6 +247,23 @@ public class TestCase {
     	    myObject.setTarget("0".getBytes());
     	    value = myObject.estimation();
     	    if(0.0 == value) { System.out.println("OK"); } else {System.out.println("WRONG:value="+value ); }
+    	}
+    	catch(Exception e) {
+    	    System.out.println("Exception occurred: STOP");
+    	}
+
+      //case 6 spaceがセットされていない
+      try {
+          System.out.print("CASE 6 : ");
+    	    InformationEstimatorInterface myObject;
+    	    double value;
+    	    // System.out.println("checking s4.B183328.InformationEstimator");
+    	    myObject = new s4.B183328.InformationEstimator();
+          //文字列セット
+    	    myObject.setSpace("00000000".getBytes());
+    	    myObject.setTarget("1".getBytes());
+    	    value = myObject.estimation();
+    	    if(Double.MAX_VALUE == value) { System.out.println("OK"); } else {System.out.println("WRONG:value="+value ); }
     	}
     	catch(Exception e) {
     	    System.out.println("Exception occurred: STOP");
