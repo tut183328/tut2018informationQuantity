@@ -145,8 +145,8 @@ public class TestCase {
     	    // System.out.println("checking s4.B183328.Frequencer");
     	    myObject = new s4.B183328.Frequencer();
 
-          String target = "aaaa";             //探索文字
-          String space = "aa";  //探索文字列
+          String target = "12345";             //探索文字
+          String space = "12";  //探索文字列
 
     	    myObject.setSpace(space.getBytes());
     	    myObject.setTarget(target.getBytes());
@@ -158,6 +158,56 @@ public class TestCase {
     	    System.out.println("Exception occurred: STOP");
     	}
 
+      //case 7 target が同じ文字で2文字以上(aaなど)の時
+      //      かつ，spaceの末尾にtargetが出現するとき
+      try {
+          System.out.print("CASE 7 : ");
+    	    FrequencerInterface  myObject;
+    	    int freq;
+    	    // System.out.println("checking s4.B183328.Frequencer");
+    	    myObject = new s4.B183328.Frequencer();
+
+          String target = "11";             //探索文字
+          String space = "123113311";  //探索文字列
+
+    	    myObject.setSpace(space.getBytes());
+    	    myObject.setTarget(target.getBytes());
+    	    freq = myObject.frequency();
+
+    	    if(2 == freq) { System.out.println("OK"); } else {System.out.println("WRONG:freq="+freq) ; }
+    	}
+    	catch(Exception e) {
+    	    System.out.println("Exception occurred: STOP");
+    	}
+
+      //case 8 target が同じ文字で2文字以上(aaなど)の時
+      //      かつ，spaceに2文字以上で同じ文字列が出現するとき(aaaなど)
+      try {
+          System.out.print("CASE 8 : ");
+    	    FrequencerInterface  myObject;
+    	    int freq;
+    	    // System.out.println("checking s4.B183328.Frequencer");
+    	    myObject = new s4.B183328.Frequencer();
+
+          String target = "11";             //探索文字
+          String space = "1111111122";  //探索文字列
+
+    	    myObject.setSpace(space.getBytes());
+    	    myObject.setTarget(target.getBytes());
+    	    freq = myObject.frequency();
+
+    	    if(4 == freq) { System.out.println("OK"); } else {System.out.println("WRONG:freq="+freq) ; }
+    	}
+    	catch(Exception e) {
+    	    System.out.println("Exception occurred: STOP");
+    	}
+
+
+
+
+
+//++++ InformationEstimatorInterface +++++++++++++++++++++++++++++++++++++++++++++++++++
+      System.out.println("========");
     	try {
         System.out.println("CASE 1 : ");
     	    InformationEstimatorInterface myObject;
