@@ -158,6 +158,7 @@ public class TestCase {
     	    System.out.println("Exception occurred: STOP");
     	}
 
+      //ホワイトケース
       //case 7 target が同じ文字で2文字以上(aaなど)の時
       //      かつ，spaceの末尾にtargetが出現するとき
       try {
@@ -167,7 +168,7 @@ public class TestCase {
     	    // System.out.println("checking s4.B183328.Frequencer");
     	    myObject = new s4.B183328.Frequencer();
 
-          String target = "11";             //探索文字
+          String target = "11";        //探索文字
           String space = "123113311";  //探索文字列
 
     	    myObject.setSpace(space.getBytes());
