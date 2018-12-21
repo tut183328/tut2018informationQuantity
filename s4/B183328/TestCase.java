@@ -28,7 +28,7 @@ import s4.specification.*;
 // }
 
 
-
+//テストケース
 public class TestCase {
     public static void main(String[] args) {
 
@@ -197,7 +197,7 @@ public class TestCase {
     	    myObject.setTarget(target.getBytes());
     	    freq = myObject.frequency();
 
-    	    if(4 == freq) { System.out.println("OK"); } else {System.out.println("WRONG:freq="+freq) ; }
+    	    if(7 == freq) { System.out.println("OK"); } else {System.out.println("WRONG:freq="+freq) ; }
     	}
     	catch(Exception e) {
     	    System.out.println("Exception occurred: STOP");
