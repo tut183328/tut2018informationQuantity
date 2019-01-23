@@ -127,98 +127,112 @@ public class Frequencer implements FrequencerInterface{
 	//
 	// ****  Please write code here... ***
   /////////////////////////////////////////////////////
-  int target_count = 0; //targetの文字数
-
+  // int target_count = 0; //targetの文字数
+  // System.out.println("targetCompare");
+  // System.out.println(j+":"+end);
   for(int k=0;k<end-j;k++){
+    if(suffixArray[i]+k > mySpace.length-1){
+      System.out.println(suffixArray[i]+k);
+      return -2;
+    }
 
-    if(mySpace[suffixArray[i+k]]>myTarget[j+k]){
+    if(mySpace[suffixArray[i]+k]>myTarget[j+k]){
       return 1;
     }
-    else if(mySpace[suffixArray[i+k]]<myTarget[j+k]){
+    else if(mySpace[suffixArray[i]+k]<myTarget[j+k]){
       return -1;
     }
     else{
-      target_count++;
-      if(target_count == end - j){
+      if(k+1 == end-j){
         return 0;
       }
     }
-  }
-  if(i<j){
-    return 1;
+    // System.out.println("kokokuru?");
   }
 	/////////////////////////////////////////////////////
-	return 0; // This line should be modified.
+	return 1; // This line should be modified.
     }
 
-    private int subByteStartIndex(int start, int end) {
-	// It returns the index of the first suffix which is equal or greater than subBytes;
-	// not implemented yet;
-	// For "Ho", it will return 5  for "Hi Ho Hi Ho".
-	// For "Ho ", it will return 6 for "Hi Ho Hi Ho".
-	//
-	// ****  Please write code here... ***
-  int count = 0;
-  boolean flag = false;
-  for(int i=0;i<mySpace.length-1;i++){
-    if(myTarget[i]==myTarget[start]){
-      for(int j=0;j<end-start;j++){
-        if(myTarget[i+j]!=myTarget[start+j]){
-          flag = false;
-          break;
-        }
+  private int subByteStartIndex(int start, int end) {
+  	// It returns the index of the first suffix which is equal or greater than subBytes;
+  	// not implemented yet;
+  	// For "Ho", it will return 5  for "Hi Ho Hi Ho".
+  	// For "Ho ", it will return 6 for "Hi Ho Hi Ho".
+  	//
+  	// ****  Please write code here... ***
+    //  Hi Ho       [0]
+    //  Ho          [1]
+    //  Ho Hi Ho    [2]
+    // Hi Ho        [3]
+    // Hi Ho Hi Ho  [4]
+    // Ho           [5]
+    // Ho Hi Ho     [6]
+    // i Ho         [7]
+    // i Ho Hi Ho   [8]
+    // o            [9]
+    // o Hi Ho      [10]
+
+    for(int i=0;i<mySpace.length;i++){
+      //文字が一致
+      if(targetCompare(i,start,end)==0){
+        System.out.println("subByteStartIndex:"+i);
+        return i;
       }
-
     }
+    return (-1);  //エラー
+
   }
 
-  //count same words with suffix
-  int i=0;
-
-  /////////////////////////////////////////////////////
-  for(int i=0; i< mySpace.length; i++) {
-    int s = suffixArray[i];
-    for(int j=s;j<mySpace.length;j++) {
-        System.out.write(mySpace[j]);
-    }
-  }
-  /////////////////////////////////////////////////////
-	//
-	return suffixArray.length; // This line should be modified.
-    }
-
-    private int subByteEndIndex(int start, int end) {
+  private int subByteEndIndex(int start, int end) {
 	// It returns the next index of the first suffix which is greater than subBytes;
 	// not implemented yet
 	// For "Ho", it will return 7  for "Hi Ho Hi Ho".
 	// For "Ho ", it will return 7 for "Hi Ho Hi Ho".
 	//
 	// ****  Please write code here... ***
+      //  Hi Ho       [0]
+      //  Ho          [1]
+      //  Ho Hi Ho    [2]
+      // Hi Ho        [3]
+      // Hi Ho Hi Ho  [4]
+      // Ho           [5]
+      // Ho Hi Ho     [6]
+      // i Ho         [7]
+      // i Ho Hi Ho   [8]
+      // o            [9]
+      // o Hi Ho      [10]
   /////////////////////////////////////////////////////
-  for(int k=0;k<space.length-1;k++){
-
+  for(int i=mySpace.length-1;i>=0;i--){
+    //文字が一致
+    if(targetCompare(i,start,end)==0){
+      System.out.println("subByteEndIndex:"+(i+1));
+      return i+1;
+    }
   }
+  return (-1);  //エラー
   /////////////////////////////////////////////////////
 	//
-	return suffixArray.length; // This line should be modified.
+	// return suffixArray.length; // This line should be modified.
     }
 
-    public int subByteFrequency(int start, int end) {
-	/* This method be work as follows, but
-	int spaceLength = mySpace.length;
-	int count = 0;
-	for(int offset = 0; offset< spaceLength - (end - start); offset++) {
-	    boolean abort = false;
-	    for(int i = 0; i< (end - start); i++) {
-		if(myTarget[start+i] != mySpace[offset+i]) { abort = true; break; }
-	    }
-	    if(abort == false) { count++; }
-	}
-	*/
-	int first = subByteStartIndex(start, end);
-	int last1 = subByteEndIndex(start, end);
-	return last1 - first;
-    }
+  public int subByteFrequency(int start, int end) {
+  	/* This method be work as follows, but
+  	int spaceLength = mySpace.length;
+  	int count = 0;
+  	for(int offset = 0; offset< spaceLength - (end - start); offset++) {
+  	    boolean abort = false;
+  	    for(int i = 0; i< (end - start); i++) {
+  		if(myTarget[start+i] != mySpace[offset+i]) { abort = true; break; }
+  	    }
+  	    if(abort == false) { count++; }
+  	}
+  	*/
+
+  	int first = subByteStartIndex(start, end);
+  	int last1 = subByteEndIndex(start, end);
+
+  	return last1 - first;
+  }
 
     public void setTarget(byte [] target) {
 	myTarget = target; if(myTarget.length>0) targetReady = true;
@@ -251,6 +265,19 @@ public class Frequencer implements FrequencerInterface{
     	    */
 
     	    frequencerObject.setTarget("H".getBytes());
+          int end = frequencerObject.myTarget.length;
+          //デバッグよう
+          // System.out.println("0:"+frequencerObject.targetCompare(0,0,end));
+          // System.out.println("1:"+frequencerObject.targetCompare(1,0,end));
+          // System.out.println("2:"+frequencerObject.targetCompare(2,0,end));
+          // System.out.println("3:"+frequencerObject.targetCompare(3,0,end));
+          // System.out.println("4:"+frequencerObject.targetCompare(4,0,end));
+          // System.out.println("5:"+frequencerObject.targetCompare(5,0,end));
+          // System.out.println("6:"+frequencerObject.targetCompare(6,0,end));
+          // System.out.println("7:"+frequencerObject.targetCompare(7,0,end));
+          // System.out.println("8:"+frequencerObject.targetCompare(8,0,end));
+          // System.out.println("9:"+frequencerObject.targetCompare(9,0,end));
+          // System.out.println("10:"+frequencerObject.targetCompare(10,0,end));
     	    //
     	    // ****  Please write code to check subByteStartIndex, and subByteEndIndex
     	    //
