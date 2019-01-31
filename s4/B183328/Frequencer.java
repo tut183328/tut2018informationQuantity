@@ -175,7 +175,7 @@ public class Frequencer implements FrequencerInterface{
     for(int i=0;i<mySpace.length;i++){
       //文字が一致
       if(targetCompare(i,start,end)==0){
-        System.out.println("subByteStartIndex:"+i);
+        // System.out.println("subByteStartIndex:"+i);
         return i;
       }
     }
@@ -205,7 +205,7 @@ public class Frequencer implements FrequencerInterface{
   for(int i=mySpace.length-1;i>=0;i--){
     //文字が一致
     if(targetCompare(i,start,end)==0){
-      System.out.println("subByteEndIndex:"+(i+1));
+      // System.out.println("subByteEndIndex:"+(i+1));
       return i+1;
     }
   }
@@ -283,7 +283,7 @@ public class Frequencer implements FrequencerInterface{
     	    //
 
     	    int result = frequencerObject.frequency();
-    	    System.out.print("Freq = "+ result+" ");
+    	    // System.out.print("Freq = "+ result+" ");
     	    if(4 == result) { System.out.println("OK"); } else {System.out.println("WRONG"); }
     	}
     	catch(Exception e) {
